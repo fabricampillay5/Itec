@@ -1,0 +1,33 @@
+"""Quiero comer manzanas, solamente manzanas."""
+# 1.Cuántas veces se repite una letra cualquiera. Parámetros: letra, cadena.
+
+def contar_letra(letra, cadena):
+    """
+    esta funcion recibe una letra y un texto
+    cuenta las veces que aparece la letra
+    """
+    contador = 0
+    # pasamos todo a minuscula
+    letra_buscada = letra.lower()
+    texto = cadena.lower()
+
+    # recorremos el texto
+    for caracter in texto:
+        if caracter == letra_buscada:
+            contador += 1
+    # la funcion devuelve la cantidad 
+    return contador
+
+# salimos de la funcion y entramos al programa
+texto_base = "Quiero comer manzanas, solamente manzanas."
+# mostramos el texto para el usuario
+print(f"Texto a analizar: '{texto_base}'\n")
+
+# pedimos letra
+letra_ingresada = input("ingrese la letra que desea contar: ")
+
+# llamamos a la funcion
+# le pasamos las variables a la funcion
+resultado = contar_letra(letra_ingresada, texto_base)
+
+print(f"la letra '{letra_ingresada}' aparece {resultado} veces en el texto.")
