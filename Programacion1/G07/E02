@@ -1,0 +1,55 @@
+# Buscar una palabra y reemplazarla por otra todas las veces que aparezca. Ej.: ‘peras’ en lugar de ‘manzanas’ quedaría 'Quiero comer peras, solamente peras.'
+
+# funciones
+
+def reemplazar_palabras(texto_base, vieja_palabra, nueva_palabra):
+    """
+    recorremos el texto caracter por caracter.
+    identifica las palabras segun separador y las reemplaza si coinciden
+    """
+    texto_final = ""
+    palabra_temporal = ""
+    separadores = " ,." # los 3 separadores definidos en la consigna
+
+    for caracter in texto_base:
+        # si el caracter actual es un separador de los 3 anteriores (espacio/coma/punto)
+        if caracter in separadores:
+            # significa que terminamos de leer una palabra completa.
+            # evaluamos si la palabra que armamos es la que queremos reemplazar
+            if palabra_temporal == vieja_palabra:
+                texto_final += nueva_palabra
+            else:
+                texto_final += palabra_temporal
+
+            # pegamos el separador exacto que acabamos de encontrar
+            texto_final += caracter
+            
+            # vaciamos la variable temporal para empezar a armar la siguiente palabra
+            palabra_temporal = ""
+
+        else:
+            # si NO es un separador es una letra normal, se la sumamos a la palabra
+            palabra_temporal += caracter
+
+    # borde critico: que pasa si el txt No termina con punto o espacio
+    #  el bucle for termina, pero nos quedo una palabra en la memoria sin evaluar
+    if palabra_temporal != "":
+        if palabra_temporal == vieja_palabra:
+            texto_final += nueva_palabra
+        else:
+            texto_final += palabra_temporal
+
+    # devolvemos el str procesado
+    return texto_final
+
+# BLOQUE PRINCIPAL
+
+texto = "Quiero comer manzanas, solamente manzanas."
+buscar = "manzanas"
+reemplazo = input("Ingrese una palabra para reemplazar 'manzanas': ")
+
+# llamamos a la funcion
+resultado_limpio = reemplazar_palabras(texto, buscar, reemplazo)
+
+print(f"Texto original: {texto}")
+print(f"Texto Modificado: {resultado_limpio}")
